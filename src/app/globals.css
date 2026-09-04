@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+  /* Calview brand — the maroon of the wordmark, on a calm neutral base. */
+  --color-brand: #5f1928;
+  --color-brand-hover: #7a2436;
+  --color-brand-soft: #f8eef0;
+  --color-brand-ring: #c98a97;
+
+  --color-ink: #1c1c1e;
+  --color-ink-muted: #5b6470;
+  --color-ink-faint: #8a93a0;
+  --color-line: #e5e7eb;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f6f7f9;
+  --color-surface-warm: #faf7f5;
+
+  /* Managed Software sub-brand — the teal/green of the "Beyond hosting" banner. */
+  --color-managed-deep: #072f36;
+  --color-managed: #0f4c56;
+  --color-managed-cyan: #1487a0;
+  --color-managed-green: #2fb47c;
+  --color-managed-green-hover: #27a06e;
+  --color-managed-mint: #7fe0b6;
+  --color-managed-soft: #f1f7f6;
+  --color-managed-line: #d7e4e2;
+  --color-managed-text-dim: #cfe4e2;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-montserrat), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-wordmark: var(--font-nunito), ui-rounded, ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1rem;
+  --shadow-card: 0 1px 2px rgb(28 28 30 / 0.04), 0 8px 24px -12px rgb(28 28 30 / 0.12);
+  --shadow-card-hover: 0 1px 2px rgb(28 28 30 / 0.06), 0 16px 40px -16px rgb(28 28 30 / 0.22);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-surface font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: #f3dde2;
+    color: #1c1c1e;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  details > summary {
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-[0.16em];
+}
+
+@utility card {
+  @apply rounded-card border border-line bg-surface p-6 shadow-card transition-shadow duration-200;
+  &:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+@utility managed-gradient {
+  background-image: linear-gradient(
+    120deg,
+    var(--color-managed-deep) 0%,
+    var(--color-managed) 55%,
+    var(--color-managed-cyan) 100%
+  );
+}
+
+@utility managed-orbs {
+  position: relative;
+  overflow: hidden;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.06);
+    pointer-events: none;
+  }
+  &::before {
+    width: 36rem;
+    height: 36rem;
+    right: -8rem;
+    top: -14rem;
+  }
+  &::after {
+    width: 22rem;
+    height: 22rem;
+    right: 10rem;
+    bottom: -14rem;
+    background: rgb(255 255 255 / 0.045);
+  }
+}
+
+@utility hero-grid {
+  background-image:
+    linear-gradient(to right, rgb(28 28 30 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(28 28 30 / 0.045) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem;
+  mask-image: radial-gradient(ellipse 70% 70% at 60% 40%, black 30%, transparent 75%);
+}
